@@ -1,0 +1,50 @@
+body {background: url(/projet/miseenpage/b.jpg) no-repeat center center fixed; 
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+         background-size: cover;}
+
+
+
+
+
+#menu ul {
+ margin:0;
+ padding:0;
+ list-style-type:none;
+ text-align:center;
+ overflow: hidden;
+ background-color: #333;
+ }
+#menu li {
+ float:left;
+ margin:auto;
+ padding:0;
+ background-color:#333;
+ }
+#menu li a {
+ display:block;
+ width:100px;
+ color: white;
+ text-align: center;
+ padding: 14px 16px;
+ text-decoration: none;
+ }
+#menu li a:hover {
+background-color: #FDF5E6;
+    color: black;
+ }
+#menu ul li ul {
+ display:none;
+ }
+
+#menu ul li:hover ul {
+ display:block;
+ }
+#menu li:hover ul li {
+ float:none;
+ }
+#menu li ul {
+ position:absolute;
+ }
+
