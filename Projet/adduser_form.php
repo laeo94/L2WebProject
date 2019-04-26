@@ -6,9 +6,10 @@
 ?>
 
 <p class="error"><?= $error??""?></p>
+
 <div class="center">
  <h1>Inscription</h1>
-    <form method="post" >
+    <form class="form-signin" method="post" >
 
         <table>
             <tr>

@@ -25,10 +25,7 @@ require("auth/EtreAuthentifie.php");?>
         <tr>
             <td><?php echo $row['cmdid'] ?></td>
             <td><?php echo $row['pid'] ?></td>
-            <td><?php echo $row['statut'] ?></td>
-            <td><input type="hidden" name="detail" value="<?php echo $row['pid'];?>"> <!-- Hidden field containing pid -->
-            <input type="submit" name="detail" value="Detail"></td>
-            
+            <td><?php echo $row['statut'] ?></td>    
         </tr>
 
         <?php   }
@@ -40,6 +37,8 @@ require("auth/EtreAuthentifie.php");?>
         }
         ?>
     </tbody> </table>
+      <td><input type="hidden" name="detail" value="<?php echo $row['pid'];?>"> <!-- Hidden field containing pid -->
+            <input type="submit" name="detail" value="Detail"></td>
 
     <?php if(isset($_POST['detail'])){
     ?>
@@ -62,8 +61,7 @@ require("auth/EtreAuthentifie.php");?>
             $achetid= $idm->getUid();
             try {
                 $db = new PDO("mysql:hostname=$hostname;dbname=$dbname",$username,$password);
-                $pid  = $_SESSION['pid'];
-                $SQL="SELECT * FROM produits INNER JOIN commandes ON produits.pid = commande.pid WHERE commande.pid='$pid' AND commande.uid = '$achetid' ";
+                $SQL="SELECT * FROM produits INNER JOIN commande ON produits.pid = commande.pid WHERE commande.uid = '$achetid'";
                 $res=$db->prepare($SQL);
                 $res->execute();
 

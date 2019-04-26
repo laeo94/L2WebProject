@@ -14,7 +14,8 @@ text-align: center;
   color: #8B4513;
 }</style>
 </head>
- 
+<?php include("db_config.php");
+?>
 <body>
    <h1>{TOPBAZAR}</h1>
     
@@ -33,29 +34,29 @@ text-align: center;
               
             <li> <a href="commandevendeur.php">Commandes</a></li>
               
-              <li><a href="">Catégories</a>
-                <ul>  
-                <li><a href="categorie_vendeur.php?ctid=1" > Humour</a></li>
-                <li><a href="categorie_vendeur.php?ctid=2"> Scolaire</a></li>
-                <li><a href="categorie_vendeur.php?ctid=3" > Théatre</a></li>
-                <li><a href="categorie_vendeur.php?ctid=4"> Romance</a></li>
-                <li><a href="categorie_vendeur.php?ctid=5">SF,Fantasy</a></li>
-                <li><a href="categorie_vendeur.php?ctid=6" >Sport, Loisirs</a></li>
-                <li><a href="categorie_vendeur.php?ctid=7">Guides</a></li>
-                <li><a href="categorie_vendeur.php?ctid=8">Cuisines</a></li>
-                <li><a href="categorie_vendeur.php?ctid=9" >Histoires</a></li>
-                <li><a href="categorie_vendeur.php?ctid=10" >Litteratures</a></li>
-                <li><a href="categorie_vendeur.php?ctid=11" >Info,Internet</a></li>
-               </ul>
-              </li>
+             <li><a href="">Catégories</a>
+                          <ul>
+                          <?php 
+                            try {
+                              $db = new PDO("mysql:hostname=$hostname;dbname=$dbname",$username,$password);
+                              $SQL="SELECT * FROM categories ";
+                              $res=$db->prepare($SQL);
+                              $res->execute();
+                              while($row=$res->fetch()){
+                          ?>
+                               <li><a href="categorie_vendeur.php?ctid=<?php echo $row['ctid']; ?>" > <?php echo $row['nom'] ?></a></li>
+                           <?php
+                              }
+                           }
+                            catch(Exception $e) {
+                              echo 'Echec de la connexion à la base de données';
+                               exit();
+                           }
+        
+                           ?>
+                          </ul>
+                        </li>
               
-              <li> <a href="">Par vendeur </a>
-                  <ul>
-                      <li> <a href ="categorie_vendeur.php?uid=5"> Vendeur 1</a></li>
-                      <li> <a href= "categorie_vendeur.php?uid=6">Vendeur 2 </a></li>
-                     
-                  </ul>
-              </li>
               
               <li><form action= "recherchevendeur.php" method ="post">
                         <input type="search" placeholder="Recherche" name="rech">

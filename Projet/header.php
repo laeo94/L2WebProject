@@ -29,13 +29,18 @@
         }
       
        
-         body {background-image: url("miseenpage/eli-francis-100644.jpg");}
+         body {background: url("miseenpage/a.jpg")  no-repeat center center fixed;
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+        background-size: cover;
+     }
         .error {
             text-align: center;
-            font-size: 30px; color: white;}
+            font-size: 100px; color: white;}
     </style>
 
-
+ <link href="bootstrap-4.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 
 <body>

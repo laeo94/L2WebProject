@@ -1,5 +1,7 @@
-<?php include("headvendeur.php");?>
-    <?php include("db_config.php");?>
+<?php include("headvendeur.php");
+include("db_config.php");
+require("auth/EtreAuthentifie.php");
+?>
     
 <table >
     <legend>Recherche</legend>
@@ -23,7 +25,7 @@
                       $db = new PDO("mysql:hostname=$hostname;dbname=$dbname",$username,$password);
                       if (isset($_GET['ctid'])) {
                           $ctid = $_GET['ctid'];
-                          $SQL="SELECT * FROM produits WHERE ctid='".$ctid."' ORDER BY pid ASC";
+                          $SQL="SELECT * FROM produits WHERE ctid='".$ctid."' AND uid='".$idm ->getUid()."' ORDER BY pid ASC";
                           $res=$db->query($SQL);
                           while($row=$res->fetch()){ ?>
                   <tr>

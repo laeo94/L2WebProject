@@ -21,7 +21,7 @@ if (empty($error)) {
     $data['login'] = $_POST['login'];
     $data['password'] = $_POST['password'];
     if (!$auth->existIdentity($data['login'])) {
-        $error =  "Utilisateur inexistant";
+        $error =  "Utilisateur inexistant ou mdp non valide";
     }
 } 
 

@@ -13,7 +13,7 @@ text-align: center;
   text-align: center;
   color: #8B4513;
 }</style>
-
+<?php include("db_config.php"); ?>
 <title>Head Acheteur</title>
 
 </head>
@@ -27,40 +27,62 @@ text-align: center;
                         <li><a href="produitacheteur.php">Les produits</a></li>
                         <li><a href="commande_acheteur.php">Mes commandes</a></li>
                         <li><a href="">Catégories</a>
-                <ul>  
-                <li><a href="categorie_acheteur.php?ctid=1" > Humour</a></li>
-                <li><a href="categorie_acheteur.php?ctid=2"> Scolaire</a></li>
-                <li><a href="categorie_acheteur.php?ctid=3" > Théatre</a></li>
-                <li><a href="categorie_acheteur.php?ctid=4"> Romance</a></li>
-                <li><a href="categorie_acheteur.php?ctid=5">SF,Fantasy</a></li>
-                <li><a href="categorie_acheteur.php?ctid=6" >Sport, Loisirs</a></li>
-                <li><a href="categorie_acheteur.php?ctid=7">Guides</a></li>
-                <li><a href="categorie_acheteur.php?ctid=8">Cuisines</a></li>
-                <li><a href="categorie_acheteur.php?ctid=9" >Histoires</a></li>
-                <li><a href="categorie_acheteur.php?ctid=10" >Litteratures</a></li>
-                <li><a href="categorie_acheteur.php?ctid=11" >Info,Internet</a></li>
-               </ul>
-              </li>
-             
-            <li> <a href="">Par vendeur </a>
-                  <ul>
-                      <li> <a href ="categorie_acheteur.php?uid=5"> Vendeur 1</a></li>
-                      <li> <a href= "categorie_acheteur.php?uid=6">Vendeur 2 </a></li>
-                     
-                      
-                  </ul>
-              </li>
+                          <ul>
+                          <?php 
+                            try {
+                              $db = new PDO("mysql:hostname=$hostname;dbname=$dbname",$username,$password);
+                              $SQL="SELECT * FROM categories";
+                              $res=$db->prepare($SQL);
+                              $res->execute();
+                              while($row=$res->fetch()){
+                          ?>
+                               <li><a href="categorie_acheteur.php?ctid=<?php echo $row['ctid']; ?>" > <?php echo $row['nom'] ?></a></li>
+                           <?php
+                              }
+                           }
+                            catch(Exception $e) {
+                              echo 'Echec de la connexion à la base de données';
+                               exit();
+                           }
+        
+                           ?>
+                          </ul>
+                        </li>
+
+                        <li> <a href="">Par vendeur </a>
+                        <ul>
+                          <?php 
+                            try {
+                              $db = new PDO("mysql:hostname=$hostname;dbname=$dbname",$username,$password);
+                              $SQL="SELECT uid, nom, prenom FROM users WHERE role='vendeur' ";
+                              $res=$db->prepare($SQL);
+                              $res->execute();
+                              while($row=$res->fetch()){
+                          ?>
+                               <li><a href="categorie_acheteur.php?uid=<?php echo $row['uid']; ?>" > <?php echo $row['nom']; echo "  ";echo $row['prenom'];?></a></li>
+                           <?php
+                              }
+                           }
+                            catch(Exception $e) {
+                              echo 'Echec de la connexion à la base de données';
+                               exit();
+                           }
+        
+                           ?>
+                          </ul>
+                        </li>
               
-              <li><form action= "rechercheacheteur.php" method ="post">
-                        <input type="search" placeholder="Recherche" name="rech">
-                        <button type="submit" ><span></span>Chercher</button>
-                  </form>
-              </li>
-                      <button>
-              <a href="deconnexion.php" >Deconnexion</a>
-              </button>
-                    </ul>
-                 
+                        <li>
+                          <form action= "rechercheacheteur.php" method ="post">
+                            <input type="search" placeholder="Recherche" name="rech">
+                              <button type="submit" ><span></span>Chercher</button>
+                          </form>
+                        </li>
+                        
+                        <button>
+                          <a href="deconnexion.php" >Deconnexion</a>
+                        </button>
+                    </ul>   
             </div>
         </nav>
         
